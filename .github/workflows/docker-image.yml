@@ -26,17 +26,17 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    # Build Image 1 with OCI LABEL (already hardcoded in Dockerfile)
+  # Build Image 1 with OCI LABEL (already hardcoded in Dockerfile)
     - name: Build Image 1
       run: |
         docker build -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1:v1 .
-        docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1: v1
+        docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1:v1  # Fixed the issue here
 
     # Build Image 2 with Provenance (Attestation)
     - name: Build Image 2 with Provenance (Attestation)
       run: |
-        docker buildx build --provenance=true  -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1:v2 .
-        docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1:v2
+        docker buildx build --provenance=true -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image2:v2 .
+        docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-harbor/image1:v2  # Fixed the issue here
 
     - name: Logout from Harbor
       run: docker logout ${{ secrets.HARBOR_REGISTRY_URL }}
