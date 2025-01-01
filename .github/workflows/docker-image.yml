@@ -29,13 +29,13 @@ jobs:
     # Build Image 1 with OCI LABEL (already hardcoded in Dockerfile)
     - name: Build Image 1
       run: |
-        docker build -t ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image1:${GITHUB_SHA} .
+        docker build -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image1:${GITHUB_SHA} .
         docker push ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image1:${GITHUB_SHA}
 
     # Build Image 2 with Provenance (Attestation)
     - name: Build Image 2 with Provenance (Attestation)
       run: |
-        docker buildx build --provenance=true -t ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image2:${GITHUB_SHA} .
+        docker buildx build --provenance=true  -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image2:${GITHUB_SHA} .
         docker push ${{ secrets.HARBOR_REGISTRY_URL }}/your_project/image2:${GITHUB_SHA}
 
     - name: Logout from Harbor
