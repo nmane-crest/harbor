@@ -3,9 +3,10 @@ name: Publish Docker Images to Harbor
 on:
   push:
     branches:
-      - main  # Trigger workflow on pushes to the main branch
-    paths:
-      - Dockerfile  # Trigger workflow on changes to the Dockerfile
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build_and_publish:
