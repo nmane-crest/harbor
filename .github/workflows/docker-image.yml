@@ -32,11 +32,9 @@ jobs:
         docker build -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-demo/image1:v1 .
         docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-demo/image1:v1  # Fixed the issue here
 
-    # Build Image 2 with Provenance (Attestation)
+    # Build Image 2 with Provenance (Attestation) and Push to Harbor
     - name: Build Image 2 with Provenance (Attestation)
       run: |
-        docker buildx build --provenance=true -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-demo/image2:v2 .
-        docker push ${{ secrets.HARBOR_REGISTRY_URL }}/test-demo/image1:v2  # Fixed the issue here
-
+        docker buildx build --provenance=true -f .github/workflows/Dockerfile -t ${{ secrets.HARBOR_REGISTRY_URL }}/test-demo/image2:v2 --push .
     - name: Logout from Harbor
       run: docker logout ${{ secrets.HARBOR_REGISTRY_URL }}
