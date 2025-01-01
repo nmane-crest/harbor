@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Add an OCI label to the image with the repository URL
-LABEL org.opencontainers.image.source="https://bitbucket.org/nikhilmane_crest/new_project/src/master/"
+LABEL org.opencontainers.image.source="https://bitbucket.org/xyz/new_project/src/master/"
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
